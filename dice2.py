@@ -86,8 +86,9 @@ class DND_die_roller:
                     print self.target
                     print self.dmg
             if(o == 99):
-                method = raw_input('(f)ill,(q)uit,(h)elp or other? ')
+                method = 'h'
                 while(method != 'q'):
+                    method = raw_input('(f)ill,(q)uit,(h)elp or other? ')
                     if(method == 'h'):
                         print 'Commands:'
                         print '(f)ill, (d)amage, (hi)t, (a)dvantages'
@@ -151,8 +152,6 @@ class DND_die_roller:
                                 self.load_list(data_list)
                                 f_out.write(str(self.exec_test()) + '\n')
                         f_out.close()
-                    if(method != 'q'):
-                        method = raw_input('(f)ill,(q)uit or other? ')
 
 my_dnd_roller = DND_die_roller()
 my_dnd_roller.start()
