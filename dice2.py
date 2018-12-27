@@ -3,7 +3,7 @@ import sys
 import numpy as np
 
 class DND_die_roller:
-    d = 0
+    d = 2
     rr = 0 
     c = 100000
     ac = 0
@@ -47,9 +47,9 @@ class DND_die_roller:
         self.target = self.ac - self.mod
         self.dmg = (((self.d+1) / 2.0) + self.dmgMod)
     def start(self):
-        o = int(raw_input('Option? '))            
-        
+        o = 99 
         while(o != 0):
+            o = int(raw_input('3 exec, 4 show setting, 99 set settings, 0 exit: '))
             if(o == 1):
                     hits = 0.0
                     tdmg = 0.0
@@ -89,6 +89,11 @@ class DND_die_roller:
                 method = raw_input('(f)ill,(q)uit,(h)elp or other? ')
                 while(method != 'q'):
                     if(method == 'h'):
+                        print 'Commands:'
+                        print '(f)ill, (d)amage, (hi)t, (a)dvantages'
+                        print 'gwm for great weapon master buff'
+                        print 'load, load_many'
+                        print '(q)uit, (h)elp'
                     if(method == 'f'):
                         self.d = int(raw_input('Dmg die size? '))
                         self.rr = int(raw_input('Reroll less than? '))
@@ -104,7 +109,7 @@ class DND_die_roller:
                         self.d = int(raw_input('Dmg die size? '))
                         self.dmgMod = int(raw_input('dmg mod? '))
                         self.dmg = (((self.d+1) / 2.0) + self.dmgMod)
-                    if(method == 'h'):
+                    if(method == 'hi'):
                         self.ac = int(raw_input('AC? '))
                         self.mod = int(raw_input('To hit mod? '))
                         self.target = self.ac - self.mod
@@ -148,7 +153,6 @@ class DND_die_roller:
                         f_out.close()
                     if(method != 'q'):
                         method = raw_input('(f)ill,(q)uit or other? ')
-            o = int(raw_input('Option? '))
 
 my_dnd_roller = DND_die_roller()
 my_dnd_roller.start()
