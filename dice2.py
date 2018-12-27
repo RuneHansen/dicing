@@ -46,6 +46,18 @@ class DND_die_roller:
             self.c = int(data_list[6])
         self.target = self.ac - self.mod
         self.dmg = (((self.d+1) / 2.0) + self.dmgMod)
+    def load_many(self, filename):
+        f_in = open(filename, 'r')
+        data = f_in.readlines()
+        f_in.close()
+        f_out = open(filename + '.output', 'w')
+        for line in data:
+            data_list = line.split(",")
+            if(len(data_list) >= 4):
+                self.load_list(data_list)
+                f_out.write(str(self.exec_test()) + '\n')
+        f_out.close()
+
     def start(self):
         o = 99 
         while(o != 0):
@@ -142,16 +154,10 @@ class DND_die_roller:
                         method = 'q'
                     if(method == 'load_many'):
                         fname = raw_input('Filename: ')
-                        f_in = open(fname, 'r')
-                        data = f_in.readlines()
-                        f_in.close()
-                        f_out = open(fname + '.output', 'w')
-                        for line in data:
-                            data_list = line.split(",")
-                            if(len(data_list) >= 4):
-                                self.load_list(data_list)
-                                f_out.write(str(self.exec_test()) + '\n')
-                        f_out.close()
+                        self.load_many(fname)
 
 my_dnd_roller = DND_die_roller()
-my_dnd_roller.start()
+if(len(sys.argv) > 1):
+    my_dnd_roller.load_many(sys.argv[1])
+else:
+    my_dnd_roller.start()
